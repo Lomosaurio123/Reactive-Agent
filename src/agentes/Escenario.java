@@ -118,28 +118,32 @@ public class Escenario extends JFrame{
         tablero = new JLabel[dim][dim];
         matrix = new int[dim][dim];
         
-        int i, j;
         
-        for(i=0;i<dim;i++)
-            for(j=0;j<dim;j++){
+        for(int i=0;i<dim;i++)
+            for(int j=0;j<dim;j++){
+                int row = i;
+                int col = j;
                 matrix[i][j]=0;
                 tablero[i][j]=new JLabel();
                 tablero[i][j].setBounds(j*50+10,i*50+10,50,50);
                 tablero[i][j].setBorder(BorderFactory.createDashedBorder(Color.black));
                 tablero[i][j].setOpaque(false);
                 this.add(tablero[i][j]);
-                
+            
                 tablero[i][j].addMouseListener(new MouseAdapter(){ // Este listener nos ayuda a agregar poner objetos en la rejilla
-                        @Override
-                        public void mousePressed(MouseEvent e){
-                               insertaObjeto(e);
-                        }   
+                    @Override
+                    public void mousePressed(MouseEvent e){
+                        insertaObjeto(e);
+                        if(actualIcon == obstacleIcon) matrix[row][col] = 1;
+                        else if(actualIcon == sampleIcon) matrix[row][col] = 2;
+                        else if(actualIcon == motherIcon) matrix[row][col] = 3;
+                    }   
                 
-                        @Override
-                        public void mouseReleased(MouseEvent e){
-                                insertaObjeto(e);
-                        }   
-                    });           
+                    @Override
+                    public void mouseReleased(MouseEvent e){
+                        insertaObjeto(e);
+                    }    
+                });           
             }
     }
         
@@ -172,6 +176,6 @@ public class Escenario extends JFrame{
     public void insertaObjeto(MouseEvent e){
         JLabel casilla = (JLabel) e.getSource();
         if(actualIcon!=null) casilla.setIcon(actualIcon); 
-        System.out.println(casilla );
+        System.out.println(casilla);
     }
 }

@@ -46,7 +46,7 @@ public class Agente extends Thread{
                 }
             }
 
-            //Evitamos que se salga de los boredes  
+            //Evitamos que se salga de los boredes o intente cruzar obstaculos
             if( i > matrix.length-2 && next_move_row == 1) {
                 next_move_row = -1;
                 next_move_col = 0;
@@ -64,7 +64,8 @@ public class Agente extends Thread{
                 next_move_col = 1;
                 next_move_row = 0;
             }
-    
+            
+
             //Realizamos los movimientos
             i += next_move_row;
             j += next_move_col;
@@ -82,6 +83,6 @@ public class Agente extends Thread{
     public synchronized void actualizarPosicion(){
         casillaAnterior.setIcon(null); // Elimina su figura de la casilla anterior
         tablero[i][j].setIcon(icon); // Pone su figura en la nueva casilla
-        System.out.println(nombre + " fila:" + i + " Columna:"+ j);       
+        System.out.println(nombre + " fila:" + i + " Columna:"+ j);
     }
 }
