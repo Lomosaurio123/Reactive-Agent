@@ -47,20 +47,22 @@ public class Agente extends Thread{
             }
 
             //Evitamos que se salga de los boredes o intente cruzar obstaculos
-            if( i > matrix.length-2 && next_move_row == 1) {
+            if( ( i > matrix.length-2 || matrix[i+1][j] == 1 ) && next_move_row == 1 ) {
                 next_move_row = -1;
                 next_move_col = 0;
             }
-            if( i < 1 && next_move_row == -1 ){
+
+            if( ( i < 1 || matrix[i-1][j] == 1 ) && next_move_row == -1 ){
                 next_move_row = 1;
                 next_move_col = 0;
             }
-            if( j > matrix.length-2 && next_move_col == 1) {
+            
+            if( ( j > matrix.length-2 || matrix[i][j+1] == 1 ) && next_move_col == 1 ) {
                 next_move_col = -1;
                 next_move_row = 0;
             }
 
-            if( j < 1 && next_move_col == -1 ) {
+            if( ( j < 1 || matrix[i][j-1] == 1 ) && next_move_col == -1 ) {
                 next_move_col = 1;
                 next_move_row = 0;
             }
