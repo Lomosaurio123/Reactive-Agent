@@ -97,6 +97,5 @@ public class Agente extends Thread{
         casillaAnterior.setIcon(null); // Elimina su figura de la casilla anterior
         tablero[i][j].setIcon(icon); // Pone su figura en la nueva casilla
         System.out.println(nombre + " fila:" + i + " Columna:"+ j);
-        System.out.println(matrix[0][0]);
     }
 }
