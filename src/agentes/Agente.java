@@ -2,6 +2,7 @@ package agentes;
 
 import java.util.Random;
 
+import javax.lang.model.element.NestingKind;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -66,13 +67,19 @@ public class Agente extends Thread{
                 next_move_col = 1;
                 next_move_row = 0;
             }
+
+            //Caso donde este entre dos obstaculos verticalmente lejos de la orilla 
+            if( ( i < matrix.length - 1 && i > 1 ) && (matrix[i+1][j] == 1 && matrix[i-1][j] == 1) ) next_move_row = 0;
             
+            //Caso donde este entre dos obstaculos horizontalmente o cerca de la orilla 
+            if( ( j < matrix.length - 1 && j > 1 ) && (matrix[i][j+1] == 1 && matrix[i][j-1] == 1)  ) next_move_col = 0;
 
             //Realizamos los movimientos
             i += next_move_row;
             j += next_move_col;
 
             actualizarPosicion();
+
             try{
                sleep(100+aleatorio.nextInt(100));//Define la velocidad con la que se mueven
             }
@@ -86,5 +93,6 @@ public class Agente extends Thread{
         casillaAnterior.setIcon(null); // Elimina su figura de la casilla anterior
         tablero[i][j].setIcon(icon); // Pone su figura en la nueva casilla
         System.out.println(nombre + " fila:" + i + " Columna:"+ j);
+        System.out.println(matrix[0][0]);
     }
 }
