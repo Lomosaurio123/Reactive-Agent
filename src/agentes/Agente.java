@@ -74,6 +74,10 @@ public class Agente extends Thread{
             //Caso donde este entre dos obstaculos horizontalmente o cerca de la orilla 
             if( ( j < matrix.length - 1 && j > 1 ) && (matrix[i][j+1] == 1 && matrix[i][j-1] == 1)  ) next_move_col = 0;
 
+            //Caso en el que es obstaculo frontera
+            if( ( i == matrix.length -1 && matrix[i-1][j] == 1 ) || ( i == 0 && matrix[i+1][j] == 1 ) ) next_move_row = 0;
+            if( ( j == matrix.length -1 && matrix[i][j-1] == 1 ) || ( j == 0 && matrix[i][j+1] == 1 ) ) next_move_col = 0;
+
             //Realizamos los movimientos
             i += next_move_row;
             j += next_move_col;
