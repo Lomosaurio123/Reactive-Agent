@@ -20,6 +20,6 @@ Finally we have to deal with the edge case when the agent is between obstacles o
 
 ![image](https://user-images.githubusercontent.com/85517698/189187739-987fcabb-d4bf-4bd3-9861-261a16ddd4d7.png)
 
-after check all the cases we do the movement in the table.
+after check all the cases we do the movement on the table.
 
 ![image](https://user-images.githubusercontent.com/85517698/189187905-7af96534-1bbf-4f38-b3f0-082c91b2b4fd.png)
