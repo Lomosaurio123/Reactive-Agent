@@ -7,6 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -22,6 +23,7 @@ public class Escenario extends JFrame{
     private JLabel[][] tablero;     
     private int[][] matrix;
     private final int dim = 12;
+    private int number_pokeballs;
 
     private ImageIcon robot1;
     private ImageIcon robot2;
@@ -101,8 +103,8 @@ public class Escenario extends JFrame{
         addWindowListener(new MyWindowAdapter());
         
         // Crea 2 agentes
-        Bruno = new Agente("Bruno",robot1, matrix, tablero); 
-        Red = new Agente("Red",robot2, matrix, tablero); 
+        Bruno = new Agente("Bruno",robot1, matrix, tablero, motherIcon); 
+        Red = new Agente("Red",robot2, matrix, tablero, motherIcon); 
     }
         
     private void gestionaSalir(ActionEvent eventObject){
@@ -117,8 +119,7 @@ public class Escenario extends JFrame{
     private void formaPlano(){
         tablero = new JLabel[dim][dim];
         matrix = new int[dim][dim];
-        
-        
+
         for(int i=0;i<dim;i++)
             for(int j=0;j<dim;j++){
                 int row = i;
@@ -135,14 +136,19 @@ public class Escenario extends JFrame{
                     public void mousePressed(MouseEvent e){
                         insertaObjeto(e);
                         if(actualIcon == obstacleIcon) matrix[row][col] = 1;
-                        else if(actualIcon == sampleIcon) matrix[row][col] = 2;
+                        else if(actualIcon == sampleIcon) {
+                            matrix[row][col] = 2;
+                            number_pokeballs ++;
+                            Bruno.objective = number_pokeballs;
+                            Red.objective = number_pokeballs;
+                        }
                         else if(actualIcon == motherIcon) matrix[row][col] = 3;
                     }   
-                
+                /* 
                     @Override
                     public void mouseReleased(MouseEvent e){
                         insertaObjeto(e);
-                    }    
+                    }     */
                 });           
             }
     }
@@ -176,6 +182,5 @@ public class Escenario extends JFrame{
     public void insertaObjeto(MouseEvent e){
         JLabel casilla = (JLabel) e.getSource();
         if(actualIcon!=null) casilla.setIcon(actualIcon); 
-        System.out.println(casilla);
     }
 }

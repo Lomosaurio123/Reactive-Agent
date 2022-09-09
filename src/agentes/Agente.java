@@ -10,13 +10,18 @@ public class Agente extends Thread{
     int i;
     int j;
     ImageIcon icon;
+    ImageIcon mother;
     int[][] matrix;
     JLabel tablero[][];
+    int objective;
+    int collected;
     
     JLabel casillaAnterior;
+    int previus_row;
+    int previus_col;
     Random aleatorio = new Random(System.currentTimeMillis());
     
-    public Agente(String nombre, ImageIcon icon, int[][] matrix, JLabel tablero[][]){
+    public Agente(String nombre, ImageIcon icon, int[][] matrix, JLabel tablero[][], ImageIcon mother){
         this.nombre = nombre;
         this.icon = icon;
         this.matrix = matrix;
@@ -24,7 +29,8 @@ public class Agente extends Thread{
 
         this.i = aleatorio.nextInt(matrix.length);
         this.j = aleatorio.nextInt(matrix.length);
-        tablero[i][j].setIcon(icon);        
+        tablero[i][j].setIcon(icon);    
+        this.mother = mother;    
     }
 
     
@@ -36,6 +42,9 @@ public class Agente extends Thread{
         while(true){
 
             casillaAnterior = tablero[i][j];
+            previus_row = i;
+            previus_col = j;
+
             //Obtener el movimiento aleatorio evitando las diagonales 
             int flag = 1;
             while(flag == 1) {
@@ -81,7 +90,19 @@ public class Agente extends Thread{
             i += next_move_row;
             j += next_move_col;
 
+            //Atrapar las pockebolas 
+            if( matrix[i][j] == 2 ) {
+                collected++;
+                matrix[i][j] = 0;
+            }
+
+            //Encontrar casa
+            if( matrix[i][j] == 3 ) {
+                //toDo: finish the collection of pokeballs
+            }
+
             actualizarPosicion();
+            
 
             try{
                sleep(100+aleatorio.nextInt(100));//Define la velocidad con la que se mueven
@@ -94,7 +115,11 @@ public class Agente extends Thread{
 
     public synchronized void actualizarPosicion(){
         casillaAnterior.setIcon(null); // Elimina su figura de la casilla anterior
+        if( matrix[previus_row][previus_col] == 3 ) {
+            casillaAnterior.setIcon(mother); 
+        }
         tablero[i][j].setIcon(icon); // Pone su figura en la nueva casilla
         System.out.println(nombre + " fila:" + i + " Columna:"+ j);
+        System.out.println(collected);
     }
 }
