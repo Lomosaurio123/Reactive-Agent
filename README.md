@@ -5,11 +5,11 @@
 
 ## Important:
 
-| Objects  |      Matrix   |
-|----------|:-------------:|
-|          |       1       |
-|          |       2       |
-|          |       3       |
+| Objects   |      Matrix   |
+|---------- |:-------------:|
+| ![image](https://user-images.githubusercontent.com/85517698/189399373-0d0a59b0-d0c7-4bc1-96c1-6ff077beabb6.png) |       1       |
+| ![image](https://user-images.githubusercontent.com/85517698/189399461-05010c03-0fb7-4709-a933-13a1325c48fe.png) |       2       |
+| ![image](https://user-images.githubusercontent.com/85517698/189399512-18d89499-0e03-46c7-9b12-668fa1b1e959.png) |       3       |
 
 ## Obstacle mechanics:
 The first part is to deal with diagonal movement, so I use a while loop until to find that the movement between row and columns are different, then to make the movement randomly I use a function that returns random numbers in the range of -1 to 1.
