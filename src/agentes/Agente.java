@@ -99,11 +99,12 @@ public class Agente extends Thread{
             //Encontrar casa
             if( matrix[i][j] == 3 ) {
                 //toDo: finish the collection of pokeballs
+
             }
 
             actualizarPosicion();
             
-
+    
             try{
                sleep(100+aleatorio.nextInt(100));//Define la velocidad con la que se mueven
             }
@@ -120,6 +121,5 @@ public class Agente extends Thread{
         }
         tablero[i][j].setIcon(icon); // Pone su figura en la nueva casilla
         System.out.println(nombre + " fila:" + i + " Columna:"+ j);
-        System.out.println(collected);
     }
 }
