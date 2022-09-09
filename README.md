@@ -3,6 +3,14 @@
 
 # Explanation:
 
+## Important:
+
+| Objects  |      Matrix   |
+|----------|:-------------:|
+|          |       1       |
+|          |       2       |
+|          |       3       |
+
 ## Obstacle mechanics:
 The first part is to deal with diagonal movement, so I use a while loop until to find that the movement between row and columns are different, then to make the movement randomly I use a function that returns random numbers in the range of -1 to 1.
 

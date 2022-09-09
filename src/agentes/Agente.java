@@ -2,7 +2,6 @@ package agentes;
 
 import java.util.Random;
 
-import javax.lang.model.element.NestingKind;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
