@@ -6,7 +6,7 @@ package agentes;
 
 /**
  *
- * @author macario
+ * @author Lomosaurio
  */
 public class Agentes {
 

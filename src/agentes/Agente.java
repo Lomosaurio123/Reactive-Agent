@@ -13,8 +13,10 @@ public class Agente extends Thread{
     ImageIcon mother;
     int[][] matrix;
     JLabel tablero[][];
-    int objective;
     int collected;
+    int objective;
+    int deliver;
+    Agente partner;
     
     JLabel casillaAnterior;
     int previus_row;
@@ -97,13 +99,17 @@ public class Agente extends Thread{
             }
 
             //Encontrar casa
-            if( matrix[i][j] == 3 ) {
-                //toDo: finish the collection of pokeballs
-
+            if( matrix[i][j] == 3 && collected > 0 ) {
+                deliver ++;
+                collected --;
             }
 
             actualizarPosicion();
-            
+
+            //Si ambos terminan de entregar todas se termina
+            if( (deliver + partner.deliver) == objective && collected == 0) {
+                break;
+            } 
     
             try{
                sleep(100+aleatorio.nextInt(100));//Define la velocidad con la que se mueven

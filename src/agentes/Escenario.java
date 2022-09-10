@@ -8,7 +8,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.sound.sampled.SourceDataLine;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -106,6 +105,10 @@ public class Escenario extends JFrame{
         // Crea 2 agentes
         Bruno = new Agente("Bruno",robot1, matrix, tablero, motherIcon); 
         Red = new Agente("Red",robot2, matrix, tablero, motherIcon); 
+
+        //Asignamos Compañero
+        Bruno.partner = Red;
+        Red.partner = Bruno;
     }
         
     private void gestionaSalir(ActionEvent eventObject){
@@ -182,6 +185,6 @@ public class Escenario extends JFrame{
        
     public void insertaObjeto(MouseEvent e){
         JLabel casilla = (JLabel) e.getSource();
-        if(actualIcon!=null) casilla.setIcon(actualIcon); 
+        if(actualIcon!=null) casilla.setIcon(actualIcon);
     }
 }
