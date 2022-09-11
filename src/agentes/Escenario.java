@@ -24,6 +24,7 @@ public class Escenario extends JFrame{
     private int[][] matrix;
     private final int dim = 12;
     private int number_pokeballs;
+    private int number_houses;
 
     private ImageIcon robot1;
     private ImageIcon robot2;
@@ -146,7 +147,13 @@ public class Escenario extends JFrame{
                             Bruno.objective = number_pokeballs;
                             Red.objective = number_pokeballs;
                         }
-                        else if(actualIcon == motherIcon) matrix[row][col] = 3;
+                        else if(actualIcon == motherIcon) {
+                            matrix[row][col] = 3;
+                            number_houses++;
+                            int[] position = new int[]{row,col};
+                            Bruno.houses.put(number_houses, position);
+                            Red.houses.put(number_houses, position);
+                        };
                     }   
                 /* 
                     @Override
