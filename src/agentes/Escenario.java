@@ -7,6 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.HashMap;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -24,7 +25,6 @@ public class Escenario extends JFrame{
     private int[][] matrix;
     private final int dim = 12;
     private int number_pokeballs;
-    private int number_houses;
 
     private ImageIcon robot1;
     private ImageIcon robot2;
@@ -32,6 +32,10 @@ public class Escenario extends JFrame{
     private ImageIcon sampleIcon;
     private ImageIcon actualIcon;
     private ImageIcon motherIcon;
+    private ImageIcon migaja;
+    private ImageIcon cluster_3;
+    private ImageIcon cluster_2;
+    private ImageIcon cluster_1;
     
     private Agente Bruno;
     private Agente Red;
@@ -81,11 +85,29 @@ public class Escenario extends JFrame{
         obstacleIcon = new ImageIcon("imagenes/rock.png");
         obstacleIcon = new ImageIcon(obstacleIcon.getImage().getScaledInstance(50,50,  java.awt.Image.SCALE_SMOOTH));
         
-        sampleIcon = new ImageIcon("imagenes/pokeball.png");
+        sampleIcon = new ImageIcon("imagenes/cluster-4.png");
         sampleIcon = new ImageIcon(sampleIcon.getImage().getScaledInstance(50,50,  java.awt.Image.SCALE_SMOOTH));
+
+        cluster_3 = new ImageIcon("imagenes/cluster-3.png");
+        cluster_3 = new ImageIcon(cluster_3.getImage().getScaledInstance(50,50,  java.awt.Image.SCALE_SMOOTH));
+
+        cluster_2 = new ImageIcon("imagenes/cluster-2.png");
+        cluster_2 = new ImageIcon(cluster_2.getImage().getScaledInstance(50,50,  java.awt.Image.SCALE_SMOOTH));
+
+        cluster_1 = new ImageIcon("imagenes/cluster-1.png");
+        cluster_1 = new ImageIcon(cluster_1.getImage().getScaledInstance(50,50,  java.awt.Image.SCALE_SMOOTH));
         
         motherIcon = new ImageIcon("imagenes/home.png");
         motherIcon = new ImageIcon(motherIcon.getImage().getScaledInstance(50,50,  java.awt.Image.SCALE_SMOOTH));
+
+        migaja = new ImageIcon("imagenes/dulce.png");
+        migaja = new ImageIcon(migaja.getImage().getScaledInstance(50,50,  java.awt.Image.SCALE_SMOOTH));
+
+        //Crear el map de cluster
+        HashMap < Integer, ImageIcon > cluster = new HashMap<>();
+        cluster.put(9, cluster_3);
+        cluster.put( 6, cluster_2 );
+        cluster.put( 3, cluster_1 );
         
         this.setLayout(null);
         formaPlano();  
@@ -97,15 +119,15 @@ public class Escenario extends JFrame{
         motherShip.addItemListener(evt -> gestionaMotherShip(evt));
 
         class MyWindowAdapter extends WindowAdapter{
-            public void windowClosing(WindowEvent eventObject){
+            public void windowClosing(WindowEvent eventObject) {
 		goodBye();
             }
         }
         addWindowListener(new MyWindowAdapter());
         
         // Crea 2 agentes
-        Bruno = new Agente("Bruno",robot1, matrix, tablero, motherIcon); 
-        Red = new Agente("Red",robot2, matrix, tablero, motherIcon); 
+        Bruno = new Agente("Bruno",robot1, matrix, tablero, motherIcon, migaja, cluster); 
+        Red = new Agente("Red",robot2, matrix, tablero, motherIcon, migaja, cluster); 
 
         //Asignamos Compañero
         Bruno.partner = Red;
@@ -142,17 +164,19 @@ public class Escenario extends JFrame{
                         insertaObjeto(e);
                         if(actualIcon == obstacleIcon) matrix[row][col] = 1;
                         else if(actualIcon == sampleIcon) {
-                            matrix[row][col] = 2;
+                            matrix[row][col] = 12;
                             number_pokeballs ++;
-                            Bruno.objective = number_pokeballs;
-                            Red.objective = number_pokeballs;
+                            Bruno.objective = number_pokeballs * 4;
+                            Red.objective = number_pokeballs * 4;
                         }
                         else if(actualIcon == motherIcon) {
-                            matrix[row][col] = 3;
-                            number_houses++;
-                            int[] position = new int[]{row,col};
-                            Bruno.houses.put(number_houses, position);
-                            Red.houses.put(number_houses, position);
+                            matrix[row][col] = 2;
+                            //Guardamos la posicion de la casa
+                            Bruno.yHouseIndex = row;
+                            Bruno.xHouseIndex = col;
+
+                            Red.yHouseIndex = row;
+                            Red.xHouseIndex = col;
                         };
                     }   
                 /* 
