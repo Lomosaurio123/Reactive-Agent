@@ -193,7 +193,7 @@ public class Agente extends Thread{
             previus_col = j;
 
             //Arriba
-            if( matrix[i - 1][j] == 4 ) {
+            if( matrix[i - 1][j] == 4 &&  i > 0 ) {
 
                 i--;
                 matrix[i][j] = 0;
@@ -210,7 +210,7 @@ public class Agente extends Thread{
             }
             
             //Abajo
-            else if( matrix[i + 1][j] == 4 ) {
+            else if( matrix[i + 1][j] == 4 && i <= matrix.length - 2 ) {
 
                 i++;
                 matrix[i][j] = 0;
@@ -227,7 +227,7 @@ public class Agente extends Thread{
             }
 
             //Derecha
-            else if( matrix[i][j + 1] == 4 ) {
+            else if( matrix[i][j + 1] == 4 && j <= matrix.length - 2 ) {
 
                 j++;
                 matrix[i][j] = 0;
@@ -244,7 +244,7 @@ public class Agente extends Thread{
             }
 
             //Izquierda
-            else if( matrix[i][j - 1] == 4 ) {
+            else if( matrix[i][j - 1] == 4 &&  j > 0 ) {
 
                 j--;
                 matrix[i][j] = 0;
